@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Lokasi extends CI_Controller
 {
-    private $api_url = "http://localhost:8080/api/lokasi"; // Sesuaikan dengan URL REST API Anda
+    private $api_url = "http://localhost:8080/api/lokasi";
 
     public function __construct()
     {
@@ -12,11 +12,9 @@ class Lokasi extends CI_Controller
 
     public function index()
     {
-        // GET data Lokasi dari REST API
         $response = $this->call_api($this->api_url);
         $data['lokasi'] = $response;
 
-        // Load view dengan data yang diambil dari API
         $this->load->view('lokasi_list', $data);
     }
 
@@ -48,7 +46,6 @@ class Lokasi extends CI_Controller
                 'createdAt' => date('Y-m-d H:i:s')
             ];
 
-            // POST data ke REST API
             $this->call_api($this->api_url, 'POST', $data);
             redirect('lokasi');
         } else {
@@ -66,7 +63,6 @@ class Lokasi extends CI_Controller
                 'kota' => $this->input->post('kota')
             ];
 
-            // PUT request ke REST API
             $this->call_api($this->api_url . '/' . $id, 'PUT', $data);
             redirect('lokasi');
         } else {
